@@ -9,7 +9,7 @@ For example, in a **polling system**, we aren’t just tracking a **single** can
 **💻 Here is the complete code**
 
 <a href="https://github.com/ArunRawat404/30-Days-Solidity/blob/master/3.%20PollStation/PollStation.sol" style="font-size: 20px; text-decoration: none;">
-    🧑‍💻 SaveMyName Code Github
+    🧑‍💻 PollStation Code Github
 </a>
 
 ---
