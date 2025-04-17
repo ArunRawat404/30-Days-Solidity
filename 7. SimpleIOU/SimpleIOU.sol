@@ -11,6 +11,8 @@ contract SimpleIOU {
     // debts[debtor][creditor] = amount;
     mapping(address => mapping(address => uint256)) public debts;
 
+    event debtWaived(address indexed debtor, uint256 amount);
+
     constructor() {
         owner = msg.sender;
         registeredFriends[msg.sender] = true;
@@ -47,7 +49,7 @@ contract SimpleIOU {
 
         debts[_debtor][msg.sender] += _amount;
     }
-    
+
     function payFromWallet(address _creditor, uint256 _amount) public onlyRegistered {
         require(_creditor != address(0), "Invalid address");
         require(registeredFriends[_creditor], "Creditor not registered");
@@ -68,7 +70,7 @@ contract SimpleIOU {
         balances[msg.sender] -= _amount;
         payable(_to).transfer(_amount);
         balances[_to] += _amount;
-    } 
+    }
 
     function transferEtherViaCall(address _to, uint256 _amount) public onlyRegistered {
         require(_to != address(0), "Invalid address");
@@ -79,7 +81,7 @@ contract SimpleIOU {
         (bool callSucess, ) = payable(_to).call{value: _amount}("");
         balances[_to] += _amount;
         require(callSucess, "Transfer failed");
-    } 
+    }
 
     function withdraw(uint256 _amount) public onlyRegistered {
         require(balances[msg.sender] >= _amount, "Insufficient balance");
@@ -92,5 +94,16 @@ contract SimpleIOU {
 
     function checkBalance() public view onlyRegistered returns (uint256) {
         return balances[msg.sender];
+    }
+
+    function debtWaiver(address _debtor, uint256 _amount) public onlyRegistered {
+        require(_debtor != address(0), "Invalid address");
+        require(registeredFriends[_debtor], "Address not registered");
+        require(_amount > 0, "Amount must be greater than 0");
+        require(debts[_debtor][msg.sender] >= _amount, "Cannot forgive more than owed");
+
+        debts[_debtor][msg.sender] -= _amount;
+
+        emit debtWaived(_debtor, _amount);
     }
 }
