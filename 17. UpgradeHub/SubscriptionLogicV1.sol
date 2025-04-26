@@ -27,6 +27,6 @@ contract SubscriptionLogicV1 is SubscriptionStorageLayout {
 
     function isActive(address user) external view returns (bool) {
         Subscription storage sub = subscriptions[user];
-        return (block.timestamp < sub.expiry && !s.paused);
+        return (block.timestamp < sub.expiry && !sub.paused);
     }
 }

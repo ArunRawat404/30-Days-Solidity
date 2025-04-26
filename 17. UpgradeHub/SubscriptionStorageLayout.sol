@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.18;
 
-solidity SubscriptionStorageLayout {
+contract SubscriptionStorageLayout {
     address public logicContract;
     address public owner;
 
