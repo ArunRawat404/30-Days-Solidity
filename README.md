@@ -14,7 +14,7 @@ The main goals of this project are:
 
 ## 📜 Contracts Developed
 
-Below is a list of the contracts developed during this challenge. Many include detailed explanations or guides within their respective commit messages or documentation.
+Below is a list of the contracts developed during this challenge. Many include detailed explanations/guides within their respective folder.
 
 | Day | Contract Name                 | Brief Description                                                              | Key Concepts / Features Implemented                                        |
 | --- | ----------------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
